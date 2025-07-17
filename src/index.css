@@ -1,0 +1,11 @@
+@import "tailwindcss" important;
+
+@layer utilities {
+  .border-none {
+    border: none;
+  }
+  .flex{
+    display: flex;
+  }
+ 
+}
