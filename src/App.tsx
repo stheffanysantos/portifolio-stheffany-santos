@@ -8,6 +8,7 @@ import './css/sandbox.css'
 import './css/embla.css'
 import { Card } from 'primereact/card'
 import useEmblaCarousel from 'embla-carousel-react'
+import { useRef } from 'react'
 import nlw from './assets/img/nlw-agents.webp'
 import licode from './assets/img/licode.png'
 
@@ -25,7 +26,8 @@ const WEB_PROJECTS = [
     title: 'NLWAgents-web',
     subTitle: 'NLWAgents2025 Frontend',
     image: nlw,
-    content:'Front-end em React 19 + Vite com TypeScript e Tailwind CSS. Navegação com React Router v7, dados com React Query, componentes acessíveis com Radix UI e animações com tw-animate-css. ',
+    content:
+      'Front-end em React 19 + Vite com TypeScript e Tailwind CSS. Navegação com React Router v7, dados com React Query, componentes acessíveis com Radix UI e animações com tw-animate-css. ',
     footer: '2025 - Projeto Individual',
     link: 'https://github.com/stheffanysantos/NLWAgents-web'
   },
@@ -33,7 +35,8 @@ const WEB_PROJECTS = [
     title: 'licode-home',
     subTitle: 'Power BI + API',
     image: licode,
-    content:'Front-end com Next.js 15 e React 19, usando TypeScript e Tailwind CSS. Estilização com tailwind-merge e clsx, componentes via Radix UI e ícones com lucide-react.',
+    content:
+      'Front-end com Next.js 15 e React 19, usando TypeScript e Tailwind CSS. Estilização com tailwind-merge e clsx, componentes via Radix UI e ícones com lucide-react.',
     footer: '2025 - Projeto Acadêmico',
     link: 'https://licode-home.vercel.app/'
   }
@@ -58,7 +61,13 @@ function EmblaCarousel({
                 title={slide.title}
                 subTitle={slide.subTitle}
                 className="shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-                header={<img alt="Imagem" src={slide.image} className="w-full h-[200px] object-cover rounded-t" />}
+                header={
+                  <img
+                    alt="Imagem"
+                    src={slide.image}
+                    className="w-full h-[200px] object-cover rounded-t"
+                  />
+                }
                 footer={
                   <span className="text-sm text-gray-500">{slide.footer}</span>
                 }
@@ -74,18 +83,32 @@ function EmblaCarousel({
 }
 
 export default function App() {
+  const sobreMimRef = useRef<HTMLDivElement>(null)
+  const projetosWebRef = useRef<HTMLDivElement>(null)
+
+
+const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
+  ref.current?.scrollIntoView({ behavior: 'smooth' })
+}
+
   const start = <p>Stheffany Santos</p>
 
-  const items = [
-    { label: 'Menu' },
-    { label: 'Sobre Mim' },
-    { label: 'Projetos' },
-    { label: 'Contato' }
-  ]
+const items = [
+  {
+    label: 'Menu',
+  },
+  {
+    label: 'Sobre Mim',
+    command: () => scrollToSection(sobreMimRef)
+  },
+  {
+    label: 'Projetos Web',
+    command: () => scrollToSection(projetosWebRef)
+  }
+]
+
 
   const OPTIONS: EmblaOptionsType = { align: 'start' }
-  const SLIDE_COUNT = 4
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
   return (
     <div className="flex flex-col gap-25">
@@ -115,7 +138,7 @@ export default function App() {
         <Button label="Visualizar Portifolio" severity="help" outlined />
         <div className="w-[1031px] h-[128px] bg-neutral-300 opacity-60 rounded-[50%/100%] blur-sm mx-auto" />
       </div>
-      <div className="flex flex-col items-center gap-10  mt-40 mb-25">
+      <div ref={sobreMimRef} className="flex flex-col items-center gap-10  mt-40 mb-25" >
         <div className="flex flex-col items-center gap-2 mb-10">
           <Button label="Sobre Mim" severity="help" size="small" outlined />
         </div>
@@ -193,22 +216,29 @@ export default function App() {
           </div>
         </div>
       </div>
-      <div className="p-6">
-        <div className="flex flex-col items-center gap-2 mb-15">
-          <Button label="Projetos Web" severity="help" size="small" outlined />
+      <div ref={projetosWebRef}>
+        <div className="p-6">
+          <div className="flex flex-col items-center gap-2 mb-15">
+            <Button
+              label="Projetos Web"
+              severity="help"
+              size="small"
+              outlined
+            />
+          </div>
+          <EmblaCarousel slides={WEB_PROJECTS} options={OPTIONS} />
         </div>
-        <EmblaCarousel slides={WEB_PROJECTS} options={OPTIONS} />
-      </div>
-      <div className="p-6">
-        <div className="flex flex-col items-center gap-2 mb-15">
-          <Button
-            label="Projetos UI/UX"
-            severity="help"
-            size="small"
-            outlined
-          />
+        <div className="p-6">
+          <div className="flex flex-col items-center gap-2 mb-15">
+            <Button
+              label="Projetos UI/UX"
+              severity="help"
+              size="small"
+              outlined
+            />
+          </div>
+          {/* <EmblaCarousel slides={SLIDES} options={OPTIONS} /> */}
         </div>
-        {/* <EmblaCarousel slides={SLIDES} options={OPTIONS} /> */}
       </div>
     </div>
   )
