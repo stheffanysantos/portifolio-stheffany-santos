@@ -1,16 +1,26 @@
+import { useRef } from 'react'
+import './css/sandbox.css'
+import './css/embla.css'
+// componentes
 import { Button } from 'primereact/button'
 import { Menubar } from 'primereact/menubar'
 import { Fieldset } from 'primereact/fieldset'
 import { Skeleton } from 'primereact/skeleton'
 import UseAnimationFrame from './components/UseAnimationFrame'
 import type { EmblaOptionsType } from 'embla-carousel'
-import './css/sandbox.css'
-import './css/embla.css'
 import { Card } from 'primereact/card'
 import useEmblaCarousel from 'embla-carousel-react'
-import { useRef } from 'react'
+
+// imagens
 import nlw from './assets/img/nlw-agents.webp'
 import licode from './assets/img/licode.png'
+import uiux from './assets/img/uiux.avif'
+import typescript from './assets/img/stacks/typescript.svg'
+import react from './assets/img/stacks/react.svg'
+import figma from './assets/img/stacks/figma.svg'
+import java from './assets/img/stacks/java.svg'
+import docker from './assets/img/stacks/docker.svg'
+import postgre from './assets/img/stacks/postgre.svg'
 
 const WEB_PROJECTS = [
   {
@@ -42,11 +52,24 @@ const WEB_PROJECTS = [
   }
 ]
 
+const UI_UX_PROJECTS = [
+  {
+    title: '0',
+    subTitle: 'Nenhum projjeto cadastrado até o momento',
+    image: uiux,
+    content:
+      'Sem descrição disponível.',
+    footer: '----------',
+    link: ''
+  }
+]
+
 function EmblaCarousel({
   slides,
   options
 }: {
-  slides: typeof WEB_PROJECTS
+
+  slides: typeof UI_UX_PROJECTS
   options: EmblaOptionsType
 }) {
   const [emblaRef] = useEmblaCarousel(options)
@@ -172,14 +195,14 @@ const items = [
               <h1 className="text-4xl font-bold">SKILLS</h1>
               <div className="flex flex-col gap-2 mt-2">
                 <div className="flex flex-row gap-2">
-                  <Skeleton size="4rem" className="mr-2"></Skeleton>
-                  <Skeleton size="4rem" className="mr-2"></Skeleton>
-                  <Skeleton size="4rem" className="mr-2"></Skeleton>
+                  <img src={typescript} alt="TypeScript" className="w-16 h-16 mr-2 p-2" />
+                  <img src={react} alt="React" className="w-16 h-16 mr-2 p-2" />
+                  <img src={figma} alt="Figma" className="w-16 h-16 mr-2 p-2" />
                 </div>
                 <div className="flex flex-row gap-2">
-                  <Skeleton size="4rem" className="mr-2"></Skeleton>
-                  <Skeleton size="4rem" className="mr-2"></Skeleton>
-                  <Skeleton size="4rem" className="mr-2"></Skeleton>
+                  <img src={java} alt="Java" className="w-16 h-16 mr-2 p-2" />
+                  <img src={postgre} alt="PostgreSQL" className="w-16 h-16 mr-2 p-2" />
+                  <img src={docker} alt="Docker" className="w-16 h-16 mr-2 p-2" />
                 </div>
               </div>
             </div>
@@ -237,9 +260,26 @@ const items = [
               outlined
             />
           </div>
-          {/* <EmblaCarousel slides={SLIDES} options={OPTIONS} /> */}
+            <EmblaCarousel slides={UI_UX_PROJECTS} options={OPTIONS} />
         </div>
       </div>
+      <footer>
+        <div className='flex justify-center gap-4 mt-10'>
+          <a href="https://www.linkedin.com/in/stheffany-santos-390459271" target="_blank" rel="noopener noreferrer">
+            <Button label="Linkedin" severity="info" rounded />
+          </a>
+          <a href="https://github.com/stheffanysantos" target="_blank" rel="noopener noreferrer">
+            <Button label="Github" severity="help" rounded />
+          </a>
+          <a href="https://instagram.com/tetscode" target="_blank" rel="noopener noreferrer">
+            <Button label="Instagram" severity="secondary" rounded />
+          </a>
+        </div>
+        <div className="flex flex-col items-center  gap-2 mt-10 mb-10">
+          <p>Criado por Stheffany Santos</p>
+          <p>2025 - Todos os direitos reservados</p>
+        </div>
+      </footer>
     </div>
   )
 }
