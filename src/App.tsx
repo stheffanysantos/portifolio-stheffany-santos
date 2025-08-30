@@ -42,7 +42,7 @@ const WEB_PROJECTS = [
   },
   {
     title: 'licode-home',
-    subTitle: 'Power BI + API',
+    subTitle: 'Licode Home Page',
     image: licode,
     content:
       'Front-end com Next.js 15 e React 19, usando TypeScript e Tailwind CSS. Estilização com tailwind-merge e clsx, componentes via Radix UI e ícones com lucide-react.',
